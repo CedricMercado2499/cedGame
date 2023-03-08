@@ -1,0 +1,19 @@
+# March 03, 2023
+
+# So yeah, this is a game I plan on creating
+# My initial idea was to make a fighting game -
+# with a bunch of different characters with - 
+# different abilities.
+# It'd be cool to make some of those different - 
+# characters my friends, it'd be funny.
+# I guess in a way, I'm trying to recreate -
+# Smash Bros. Brawl, but with my own characters.
+
+# My first step is to make a movable object
+# Stuff like a skip-able intro screen would be good
+# A character selection
+# A training dummy that measures how much damage you deal
+
+# I'm still learning how to use PyGame, and I don't have - 
+# any experience in making games, but this would be -
+# a great challenge.
