@@ -22,5 +22,6 @@ class UserCharacter:
         if keys[pygame.K_DOWN] or keys[pygame.K_s]:
             self.pos[1] += 1
 
+
     def draw(self, display):
         pygame.draw.rect(display, self.color, (*self.pos, self.width, self.height))

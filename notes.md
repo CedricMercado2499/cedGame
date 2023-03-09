@@ -17,3 +17,8 @@
 # I'm still learning how to use PyGame, and I don't have - 
 # any experience in making games, but this would be -
 # a great challenge.
+
+# March 09, 2023
+# I created a movable square..
+# The goal now is to add borders and physics
+# The square shouldn't go out of bounds

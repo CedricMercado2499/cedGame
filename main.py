@@ -4,7 +4,7 @@ from pygame.locals import *
 from user_character import UserCharacter
 
 # 3/08/23 - goal is to make a user-controlled object
-
+# 3/09/23 - goal is to implement borders and gravity
 # Colors     R    G    B
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -13,9 +13,9 @@ GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 SKYBLUE = (3, 248, 252)
 
+
 # Drawing
 # pygame.draw.rect(screen, GREEN, (0, 250, 400, 100))
-
 
 
 # Main Game Loop
@@ -37,11 +37,14 @@ def main():
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
-            pygame.display.update()
+
         character.move(events)
+
         display.fill((255, 255, 255))
+        # ^ clears the screen every move
         character.draw(display)
         pygame.display.update()
+
 
 # Run
 main()
