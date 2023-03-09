@@ -1,29 +1,47 @@
 import pygame
 import sys
 from pygame.locals import *
+from user_character import UserCharacter
 
 # 3/08/23 - goal is to make a user-controlled object
 
 # Colors     R    G    B
-BLACK   =  (  0,   0,   0)
-WHITE   =  (255, 255, 255)
-RED     =  (255,   0,   0)
-GREEN   =  (  0, 255,   0)
-BLUE    =  (  0,   0, 255)
-SKYBLUE =  (  3, 248, 252)
-
-pygame.init()
-screen = pygame.display.set_mode((400, 300))  # Window size
-screen.fill(WHITE)  # Screen color
-pygame.display.set_caption('Ced Game')  # Window title
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+BLUE = (0, 0, 255)
+SKYBLUE = (3, 248, 252)
 
 # Drawing
-pygame.draw.rect(screen, GREEN, (0, 250, 400, 100))
+# pygame.draw.rect(screen, GREEN, (0, 250, 400, 100))
+
+
 
 # Main Game Loop
-while True:
-    for event in pygame.event.get(): # Event handler
-        if event.type == QUIT:
-            pygame.quit()
-            sys.exit()
+def main():
+    # Initiate PyGame
+    pygame.init()
+    # Window size
+    display = pygame.display.set_mode((400, 300))
+    pygame.display.set_caption('Ced Game')  # Window title
+    clock = pygame.time.Clock()
+    display.fill(WHITE)  # Screen color
+
+    character = UserCharacter([170, 270])
+    while True:
+        clock.tick(300)
+        events = pygame.event.get()
+
+        for event in events:  # Event handler
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+            pygame.display.update()
+        character.move(events)
+        display.fill((255, 255, 255))
+        character.draw(display)
         pygame.display.update()
+
+# Run
+main()
