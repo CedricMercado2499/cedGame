@@ -20,7 +20,7 @@ SKYBLUE = (3, 248, 252)
 # pygame.draw.rect(screen, GREEN, (0, 250, 400, 100))
 # Background ^
 
-# Main Game Loop
+
 def main():
     # Initiate PyGame
     pygame.init()
