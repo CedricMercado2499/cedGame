@@ -29,3 +29,5 @@
 # Not sure if I want to include character selection
 # I guess I should include attacks or projectiles
 # Intro screen -> Character Selection -> Play
+# Now that gravity has been implemented
+# The goal now is to make the character face left/right

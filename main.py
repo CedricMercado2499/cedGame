@@ -3,9 +3,6 @@ import sys
 from pygame.locals import *
 from user_character import UserCharacter
 
-# 3/08 -> 3/09 - goal is to make a user-controlled object
-# 3/09 -> 3/10 - goal is to implement borders and gravity
-
 # Variables
 WINDOW_WIDTH = 400  # 1000
 WINDOW_HEIGHT = 300  # 800
