@@ -22,3 +22,6 @@
 # I created a movable square..
 # The goal now is to add borders and physics
 # The square shouldn't go out of bounds
+
+# March 10, 2023
+# Borders are implemented, next is to include gravity

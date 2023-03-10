@@ -33,6 +33,9 @@ class UserCharacter:
         elif self.pos[1] + self.height > WINDOW_HEIGHT:
             self.pos[1] = WINDOW_HEIGHT - self.height
 
+        # Gravity??
+        if self.pos[1] < WINDOW_HEIGHT- self.height:
+            self.pos[1] += 0.5
     # import main.py width
     def draw(self, display):
         pygame.draw.rect(display, self.color, (*self.pos, self.width, self.height))
