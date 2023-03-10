@@ -33,11 +33,12 @@ def main():
     clock = pygame.time.Clock()
     display.fill(WHITE)  # Screen color
 
+    # Character Object
     character = UserCharacter([170, 270])
+
     while True:
         clock.tick(300)
         events = pygame.event.get()
-
         for event in events:  # Event handler
             if event.type == QUIT:
                 pygame.quit()

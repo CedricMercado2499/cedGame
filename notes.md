@@ -28,3 +28,4 @@
 # Quick and simple gravity
 # Not sure if I want to include character selection
 # I guess I should include attacks or projectiles
+# Intro screen -> Character Selection -> Play

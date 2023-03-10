@@ -11,12 +11,21 @@ class UserCharacter:
         self.dirX = 0
         self.dirY = 0
 
+        self.left = False
+        self.right = False
+        self.jump = False
+
+
     def move(self, events):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT] or keys[pygame.K_a]:
-            self.pos[0] -= 1
+            self.pos[0] -= 0.7
+            self.left = True
+            self.right = False
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
-            self.pos[0] += 1
+            self.pos[0] += 0.7
+            self.right = True
+            self.left = False
         if keys[pygame.K_UP] or keys[pygame.K_w]:
             self.pos[1] -= 1
         if keys[pygame.K_DOWN] or keys[pygame.K_s]:
@@ -40,9 +49,9 @@ class UserCharacter:
 
     # import main.py width
     def draw(self, display):
-        pygame.draw.rect(display, self.color, (*self.pos, self.width, self.height))
         headX = self.pos[0] + 5
         headY = self.pos[1] - 20
-        newPos = (headX, headY)
-        pygame.draw.rect(display, (100, 100, 100), (*newPos, self.width-10, self.height-10))
+        headPos = (headX, headY)
 
+        pygame.draw.rect(display, self.color, (*self.pos, self.width, self.height))
+        pygame.draw.rect(display, (100, 100, 100), (*headPos, self.width-10, self.height-10))
