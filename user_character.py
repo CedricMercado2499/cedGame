@@ -1,7 +1,6 @@
 # User character
 import pygame
 
-
 class UserCharacter:
     def __init__(self, pos):
         self.pos = pos
@@ -22,6 +21,18 @@ class UserCharacter:
         if keys[pygame.K_DOWN] or keys[pygame.K_s]:
             self.pos[1] += 1
 
+        # idk if this is okay, but it works
+        # Border
+        from main import WINDOW_HEIGHT, WINDOW_WIDTH
+        if self.pos[0] < 0:
+            self.pos[0] = 0
+        elif self.pos[0] + self.width > WINDOW_WIDTH:
+            self.pos[0] = WINDOW_WIDTH - self.width
+        if self.pos[1] < 0:
+            self.pos[1] = 0
+        elif self.pos[1] + self.height > WINDOW_HEIGHT:
+            self.pos[1] = WINDOW_HEIGHT - self.height
 
+    # import main.py width
     def draw(self, display):
         pygame.draw.rect(display, self.color, (*self.pos, self.width, self.height))

@@ -3,8 +3,13 @@ import sys
 from pygame.locals import *
 from user_character import UserCharacter
 
-# 3/08/23 - goal is to make a user-controlled object
-# 3/09/23 - goal is to implement borders and gravity
+# 3/08 -> 3/09 - goal is to make a user-controlled object
+# 3/09 -> 3/10 - goal is to implement borders and gravity
+
+# Variables
+WINDOW_WIDTH = 400  # 1000
+WINDOW_HEIGHT = 300  # 800
+
 # Colors     R    G    B
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -16,15 +21,15 @@ SKYBLUE = (3, 248, 252)
 
 # Drawing
 # pygame.draw.rect(screen, GREEN, (0, 250, 400, 100))
-
+# Background ^
 
 # Main Game Loop
 def main():
     # Initiate PyGame
     pygame.init()
     # Window size
-    display = pygame.display.set_mode((400, 300))
-    pygame.display.set_caption('Ced Game')  # Window title
+    display = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+    pygame.display.set_caption('The Adventures of Cedybedy')  # Window title
     clock = pygame.time.Clock()
     display.fill(WHITE)  # Screen color
 
@@ -42,6 +47,7 @@ def main():
 
         display.fill((255, 255, 255))
         # ^ clears the screen every move
+        # print(character.pos)  # Prints character coords
         character.draw(display)
         pygame.display.update()
 
