@@ -1,6 +1,7 @@
 # User character
 import pygame
 
+
 class UserCharacter:
     def __init__(self, pos):
         self.pos = pos
@@ -34,8 +35,14 @@ class UserCharacter:
             self.pos[1] = WINDOW_HEIGHT - self.height
 
         # Gravity??
-        if self.pos[1] < WINDOW_HEIGHT- self.height:
+        if self.pos[1] < WINDOW_HEIGHT - self.height:
             self.pos[1] += 0.5
+
     # import main.py width
     def draw(self, display):
         pygame.draw.rect(display, self.color, (*self.pos, self.width, self.height))
+        headX = self.pos[0] + 5
+        headY = self.pos[1] - 20
+        newPos = (headX, headY)
+        pygame.draw.rect(display, (100, 100, 100), (*newPos, self.width-10, self.height-10))
+

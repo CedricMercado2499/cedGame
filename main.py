@@ -48,8 +48,8 @@ def main():
         display.fill((255, 255, 255))
         # ^ clears the screen every move
         # print(character.pos)  # Prints character coords
-        character.draw(display)
-        pygame.display.update()
+        character.draw(display)  # Draws character
+        pygame.display.update()  # Updates
 
 
 # Run
