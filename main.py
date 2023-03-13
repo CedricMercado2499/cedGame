@@ -30,8 +30,6 @@ SKYBLUE = (3, 248, 252)
 
 
 def main():
-    pygame.display.set_caption('The Adventures of Cedybedy')  # Window title
-
     # Character Object
     character = UserCharacter([170, 270])
 
@@ -53,7 +51,15 @@ def main():
 
 
 # Run
+
+# Pygame starts
 pygame.init()
+
+# Window title
+pygame.display.set_caption('The Adventures of Cedybedy')
+
 intro_screen.introScreen()
-main()
+
+intro_screen.startMenu()
+# main()  # main() is currently used in startMenu -> start_button
 
