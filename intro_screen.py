@@ -7,7 +7,8 @@ def introScreen():
     from main import display
 
     font = pygame.font.Font(None, 36)
-    text = "The Adventures of Cedybedy"
+    text = "Hi"
+    # text = "The Adventures of Cedybedy"
     text_render = font.render(text, True, (255, 255, 255))
     text_width, text_height = font.size(text)
     text_x = (display.get_width() // 2) - (text_width // 2)
@@ -50,7 +51,10 @@ def startMenu():
     start_button = font.render("START", True, WHITE)
     options_button = font.render("OPTIONS", True, WHITE)
     quit_button = font.render("QUIT", True, WHITE)
-    title = titleFont.render("The Adventures of Cedybedy", True, WHITE)
+
+    # titleText = "The Adventures of Cedybedy"
+    titleText = "Hi"
+    title = titleFont.render(titleText, True, WHITE)
 
     start_button_rect = start_button.get_rect(center=(display.get_width() / 2, 100))
     options_button_rect = options_button.get_rect(center=(display.get_width() / 2, 150))
