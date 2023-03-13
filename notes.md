@@ -33,8 +33,12 @@
 # The goal now is to make the character face left/right
 
 # March 13, 2023
-# One of the goals is to make the character face left/rigt
+# One of the goals is to make the character face left/right
 # But another goal is to create an intro screen
 # I've typed up some code that should display the intro
 # But it doesn't work properly
 # It doesn't load the testimage, and it doesn't stay on for a few seconds
+# Had ChatGPT assist me in the intro screen
+# ChatGPT is quite reliable, I feel useless using it
+# At least I'm getting this done
+# I want to implement a 'Start Menu' - includes 'start', 'options', and 'quit'
