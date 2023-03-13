@@ -2,10 +2,12 @@ import pygame
 import sys
 from pygame.locals import *
 from user_character import UserCharacter
-
+import intro_screen
 # Variables
 WINDOW_WIDTH = 400  # 1000
 WINDOW_HEIGHT = 300  # 800
+clock = pygame.time.Clock()
+display = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 
 # Colors     R    G    B
 BLACK = (0, 0, 0)
@@ -25,9 +27,7 @@ def main():
     # Initiate PyGame
     pygame.init()
     # Window size
-    display = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
     pygame.display.set_caption('The Adventures of Cedybedy')  # Window title
-    clock = pygame.time.Clock()
     display.fill(WHITE)  # Screen color
 
     # Character Object
@@ -51,4 +51,6 @@ def main():
 
 
 # Run
-main()
+
+intro_screen.intro()
+#main()
