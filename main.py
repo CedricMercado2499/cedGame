@@ -7,7 +7,8 @@ import intro_screen
 WINDOW_WIDTH = 400  # 1000
 WINDOW_HEIGHT = 300  # 800
 clock = pygame.time.Clock()
-global display
+
+# Window size
 display = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 # making display global does not affect other modules
 # I want to be able to access display on every module
@@ -29,11 +30,7 @@ SKYBLUE = (3, 248, 252)
 
 
 def main():
-    # Initiate PyGame
-    pygame.init()
-    # Window size
     pygame.display.set_caption('The Adventures of Cedybedy')  # Window title
-    display.fill(WHITE)  # Screen color
 
     # Character Object
     character = UserCharacter([170, 270])
@@ -56,6 +53,7 @@ def main():
 
 
 # Run
-
-intro_screen.intro()
-#main()
+pygame.init()
+intro_screen.introScreen()
+main()
+pygame.quit()  # Needed?

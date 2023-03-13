@@ -1,39 +1,32 @@
 # Intro Screen
 import pygame
-import time
-import random
 
 
-def intro():
-    from main import main, BLACK, display
+def introScreen():
+    from main import display
+    font = pygame.font.Font(None, 36)
+    text = "Hi"
+    text_render = font.render(text, True, (255, 255, 255))
+    text_width, text_height = font.size(text)
+    text_x = (display.get_width() // 2) - (text_width // 2)
+    text_y = (display.get_height() // 2) - (text_height // 2)
 
-    introS = True
+    intro_time = 7000
+    intro_timer = pygame.time.get_ticks()
+    skip_intro = False
 
-    while introS:
+    running = True
+
+    while running:
         for event in pygame.event.get():
-            # print(event)
             if event.type == pygame.QUIT:
-                pygame.quit()
-                quit()
-            keys = pygame.key.get_pressed()
-            if keys[pygame.K_LEFT] or keys[pygame.K_ESCAPE]:
-                pass
-            # *if 'escape' is pressed, skip intro*
+                running = False
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    skip_intro = True
+        if (pygame.time.get_ticks() - intro_timer) > intro_time or skip_intro:
+            running = False
 
-        display.fill(BLACK)
-
-        # Use ChatGPT for reference
-
-        # First time implementing an image
-        image = pygame.image.load("images\\testimage.png").convert()
-        display.blit(image, (0, 0))
-        # displays image^
-        pygame.time.set_timer(main(), 5000)
-        # doesn't even go for 5 seconds, only 1 second
-        # doesn't even display the testimage
-        # comment out set_timer to show the image
-
-        pygame.display.update()
-
-        # I want it to be able to display intro for a few seconds
-        # Then run main
+        display.fill((0, 0, 0))
+        display.blit(text_render, (text_x, text_y))
+        pygame.display.flip()
