@@ -15,6 +15,7 @@ class UserCharacter:
         self.right = False
         self.up = False
         self.down = False
+
         self.jump = True
         self.fall = False
 
@@ -82,19 +83,24 @@ class UserCharacter:
         if self.right:
             eyeX = self.pos[0] + 20
             eyeY = self.pos[1] - 15
-        elif self.left:
+        if self.left:
             eyeX = self.pos[0]
             eyeY = self.pos[1] - 15
-        elif self.up:
+        if self.up:
             eyeX = self.pos[0] + 10
             eyeY = self.pos[1] - 25
-        elif self.down:
+        if self.down:
             eyeX = self.pos[0] + 10
             eyeY = self.pos[1] - 5
 
-        # eyeY = self.pos[1] - 15
         eyePos = (eyeX, eyeY)
 
+
+        # Draw Body
         pygame.draw.rect(display, self.color, (*self.pos, self.width, self.height))
+        # Draw Head
         pygame.draw.rect(display, (100, 100, 100), (*headPos, self.width-10, self.height-10))
-        pygame.draw.rect(display, (100, 100, 100), (*eyePos, self.width-20, self.height-20))
+
+        if self.up or self.down or self.left or self.right:
+            # Draw eyes
+            pygame.draw.rect(display, (100, 100, 100), (*eyePos, self.width - 20, self.height - 20))
