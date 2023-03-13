@@ -13,7 +13,10 @@ class UserCharacter:
 
         self.left = False
         self.right = False
-        self.jump = False
+        self.up = False
+        self.down = False
+        self.jump = True
+        self.fall = False
 
 
     def move(self, events):
@@ -22,14 +25,30 @@ class UserCharacter:
             self.pos[0] -= 0.7
             self.left = True
             self.right = False
+            self.up = False
+            self.down = False
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             self.pos[0] += 0.7
             self.right = True
             self.left = False
+            self.up = False
+            self.down = False
         if keys[pygame.K_UP] or keys[pygame.K_w]:
-            self.pos[1] -= 1
+            self.up = True
+            self.down = False
+            self.left = False
+            self.right = False
+        if keys[pygame.K_SPACE] and self.jump:
+            for i in range(100):
+                self.pos[1] -= 0.5  # Jump height
+            self.jump = False
+            self.fall = True
         if keys[pygame.K_DOWN] or keys[pygame.K_s]:
-            self.pos[1] += 1
+            # self.pos[1] += 1 # Let gravity do the work
+            self.down = True
+            self.up = False
+            self.left = False
+            self.right = False
 
         # idk if this is okay, but it works
         # Border
@@ -44,8 +63,12 @@ class UserCharacter:
             self.pos[1] = WINDOW_HEIGHT - self.height
 
         # Gravity??
-        if self.pos[1] < WINDOW_HEIGHT - self.height:
-            self.pos[1] += 0.5
+        if self.pos[1] < WINDOW_HEIGHT - self.height and self.fall:
+            self.pos[1] += 0.4
+        elif self.pos[1] == WINDOW_HEIGHT - self.height:
+            self.jump = True
+            # if character is on the floor, jump
+            # must change when applying platforms
 
     # import main.py width
     def draw(self, display):
@@ -53,12 +76,23 @@ class UserCharacter:
         headY = self.pos[1] - 20
         headPos = (headX, headY)
 
+        eyeX = 0
+        eyeY = 0
+
         if self.right:
             eyeX = self.pos[0] + 20
-        elif not self.right:
+            eyeY = self.pos[1] - 15
+        elif self.left:
             eyeX = self.pos[0]
+            eyeY = self.pos[1] - 15
+        elif self.up:
+            eyeX = self.pos[0] + 10
+            eyeY = self.pos[1] - 25
+        elif self.down:
+            eyeX = self.pos[0] + 10
+            eyeY = self.pos[1] - 5
 
-        eyeY = self.pos[1] - 15
+        # eyeY = self.pos[1] - 15
         eyePos = (eyeX, eyeY)
 
         pygame.draw.rect(display, self.color, (*self.pos, self.width, self.height))
