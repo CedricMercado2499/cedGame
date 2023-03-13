@@ -22,6 +22,8 @@ def intro():
 
         display.fill(BLACK)
 
+        # Use ChatGPT for reference
+
         # First time implementing an image
         image = pygame.image.load("images\\testimage.png").convert()
         display.blit(image, (0, 0))
