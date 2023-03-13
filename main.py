@@ -32,34 +32,30 @@ SKYBLUE = (3, 248, 252)
 def main():
     # Character Object
     character = UserCharacter([170, 270])
+    # Will have to move this into a new screen called gameplay
+    # Along with other code related to character
 
     while True:
         clock.tick(300)
-        events = pygame.event.get()
-        for event in events:  # Event handler
+
+        for event in pygame.event.get():  # Event handler
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
 
-        character.move(events)
+        character.move()
 
         display.fill((255, 255, 255))
         # ^ clears the screen every move
-        # print(character.pos)  # Prints character coords
         character.draw(display)  # Draws character
-        pygame.display.update()  # Updates
+        pygame.display.update()  # Updates screen
 
 
 # Run
 
-# Pygame starts
 pygame.init()
-
-# Window title
 pygame.display.set_caption('The Adventures of Cedybedy')
 
 intro_screen.introScreen()
-
 intro_screen.startMenu()
 # main()  # main() is currently used in startMenu -> start_button
-

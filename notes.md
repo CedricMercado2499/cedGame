@@ -42,3 +42,6 @@
 # ChatGPT is quite reliable, I feel useless using it
 # At least I'm getting this done
 # I want to implement a 'Start Menu' - includes 'start', 'options', and 'quit'
+# Start menu is implemented with the help of ChatGPT...
+# I think the next hardest part is the character selection menu
+# Well, I think the menu is light work, but when you play different characters, then it's gonna be hard

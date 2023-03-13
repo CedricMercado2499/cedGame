@@ -38,7 +38,9 @@ def introScreen():
         display.blit(text_renderSkip, (0, 0))
         pygame.display.flip()
 
+
 def startMenu():
+    # Either move this function to a separate module or rename this module
     from main import display, main
     BLACK = colors.BLACK
     WHITE = colors.WHITE
@@ -49,9 +51,9 @@ def startMenu():
     options_button = font.render("OPTIONS", True, WHITE)
     quit_button = font.render("QUIT", True, WHITE)
 
-    start_button_rect = start_button.get_rect(center=(display.get_width()/2, 100))
-    options_button_rect = options_button.get_rect(center=(display.get_width()/2, 150))
-    quit_button_rect = quit_button.get_rect(center=(display.get_width()/2, 200))
+    start_button_rect = start_button.get_rect(center=(display.get_width() / 2, 100))
+    options_button_rect = options_button.get_rect(center=(display.get_width() / 2, 150))
+    quit_button_rect = quit_button.get_rect(center=(display.get_width() / 2, 200))
 
     running = True
     while running:

@@ -20,7 +20,7 @@ class UserCharacter:
         self.fall = False
 
 
-    def move(self, events):
+    def move(self):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT] or keys[pygame.K_a]:
             self.pos[0] -= 0.7
