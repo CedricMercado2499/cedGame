@@ -7,7 +7,11 @@ import intro_screen
 WINDOW_WIDTH = 400  # 1000
 WINDOW_HEIGHT = 300  # 800
 clock = pygame.time.Clock()
+global display
 display = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+# making display global does not affect other modules
+# I want to be able to access display on every module
+# or find another way to display different visuals
 
 # Colors     R    G    B
 BLACK = (0, 0, 0)

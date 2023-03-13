@@ -31,3 +31,10 @@
 # Intro screen -> Character Selection -> Play
 # Now that gravity has been implemented
 # The goal now is to make the character face left/right
+
+# March 13, 2023
+# One of the goals is to make the character face left/rigt
+# But another goal is to create an intro screen
+# I've typed up some code that should display the intro
+# But it doesn't work properly
+# It doesn't load the testimage, and it doesn't stay on for a few seconds
