@@ -53,5 +53,14 @@ class UserCharacter:
         headY = self.pos[1] - 20
         headPos = (headX, headY)
 
+        if self.right:
+            eyeX = self.pos[0] + 20
+        elif not self.right:
+            eyeX = self.pos[0]
+
+        eyeY = self.pos[1] - 15
+        eyePos = (eyeX, eyeY)
+
         pygame.draw.rect(display, self.color, (*self.pos, self.width, self.height))
         pygame.draw.rect(display, (100, 100, 100), (*headPos, self.width-10, self.height-10))
+        pygame.draw.rect(display, (100, 100, 100), (*eyePos, self.width-20, self.height-20))

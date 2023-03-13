@@ -56,4 +56,4 @@ def main():
 pygame.init()
 intro_screen.introScreen()
 main()
-pygame.quit()  # Needed?
+

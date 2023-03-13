@@ -2,7 +2,6 @@
 import pygame
 import colors
 
-
 def introScreen():
     from main import display
 
