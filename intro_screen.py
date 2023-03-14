@@ -28,6 +28,7 @@ def introScreen():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
+                quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     skip_intro = True
@@ -65,6 +66,7 @@ def startMenu():
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                pygame.quit()
                 quit()
 
             if event.type == pygame.MOUSEBUTTONDOWN:
@@ -150,6 +152,7 @@ def characterSelection():  # Replicate StartMenu and add more buttons and such
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                pygame.quit()
                 quit()
 
             if event.type == pygame.MOUSEBUTTONDOWN:
