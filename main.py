@@ -66,5 +66,5 @@ pygame.display.set_caption('Hi')
 
 intro_screen.introScreen()
 intro_screen.startMenu()
-userCharacter = intro_screen.characterSelection()
+userCharacter = intro_screen.characterSelection()  # used in main function
 main()

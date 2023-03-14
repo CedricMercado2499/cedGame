@@ -50,3 +50,6 @@
 # Today's goal is a character selection screen
 # It should include main character selection, a button to return to start menu, and a start game button
 # I created a character selection screen, I just need to make it look better
+# The character selection screen is functional
+# I can go two ways, map selection or playing the chosen character
+# I also have to rename main(), it doesn't feel like a main anymore y'know
