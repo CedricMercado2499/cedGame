@@ -1,25 +1,36 @@
 # User character
 import pygame
-import colors
+from colors import *
 
-BLACK = colors.BLACK
 
+# Concept: if user_name is something
+# function call of that character
+# Example: if user_name == "Cedric": give Cedric abilities/visual
 
 class UserCharacter:
+
     def __init__(self, pos, user_name):
+
         self.pos = pos
         self.width = 30
         self.height = 30
         self.color = (0, 0, 0)
         self.dirX = 0
         self.dirY = 0
-        # from main import user_name
+
         self.user_name = user_name
+
+        if user_name == "Mohamed":
+            self.skin = BLACK
+        else:
+            self.skin = SKIN_WHITE
+
+
+        # Character Movement Booleans
         self.left = False
         self.right = False
         self.up = False
         self.down = False
-
         self.jump = True
         self.fall = False
 
@@ -54,11 +65,9 @@ class UserCharacter:
             self.left = False
             self.right = False
 
-
         if keys[pygame.K_ESCAPE]:  # Change character
             from main import main
             main()
-
 
         # idk if this is okay, but it works
         # Border
@@ -112,7 +121,7 @@ class UserCharacter:
         # Draw Body
         pygame.draw.rect(display, self.color, (*self.pos, self.width, self.height))
         # Draw Head
-        pygame.draw.rect(display, (100, 100, 100), (*headPos, self.width - 10, self.height - 10))
+        pygame.draw.rect(display, (self.skin), (*headPos, self.width - 10, self.height - 10))
         display.blit(character_text, character_rect)
         if self.up or self.down or self.left or self.right:
             # Draw eyes

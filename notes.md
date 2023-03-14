@@ -53,3 +53,5 @@
 # The character selection screen is functional
 # I can go two ways, map selection or playing the chosen character
 # I also have to rename main(), it doesn't feel like a main anymore y'know
+# My next goal is to clean up the code
+# This is going to be a pain, but it'll be more organized which makes it easier to add new stuff
