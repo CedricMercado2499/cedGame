@@ -49,3 +49,4 @@
 # March 14, 2023
 # Today's goal is a character selection screen
 # It should include main character selection, a button to return to start menu, and a start game button
+# I created a character selection screen, I just need to make it look better

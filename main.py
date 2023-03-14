@@ -54,7 +54,9 @@ def main():
 # Run
 
 pygame.init()
-pygame.display.set_caption('The Adventures of Cedybedy')
+pygame.display.set_caption('Hi')
+
+# pygame.display.set_caption('The Adventures of Cedybedy')
 
 intro_screen.introScreen()
 intro_screen.startMenu()

@@ -86,16 +86,57 @@ def startMenu():
 def characterSelection():  # Replicate StartMenu and add more buttons and such
 
     from main import display, main
+    # Probably don't need vv
     BLACK = colors.BLACK
     WHITE = colors.WHITE
+    YELLOW = colors.YELLOW
+    GRAY = colors.GRAY
+    RED = colors.RED
+    GREEN = colors.GREEN
 
     font = pygame.font.Font(None, 20)
     play_button = font.render("PLAY", True, WHITE)
     back_button = font.render("BACK", True, WHITE)
-
+    titleText = "Hi"
+    title = font.render(titleText, True, WHITE)
+    TITLE = title.get_rect(center=(display.get_width() / 2, 50))
 
     play_button_rect = play_button.get_rect(center=(display.get_width() - play_button.get_width(), play_button.get_height()))
     back_button_rect = back_button.get_rect(center=(back_button.get_width(), back_button.get_height()))
+
+    # Griddy
+    GRID_ROWS = 2  # Rows
+    GRID_COLS = 4  # Columns
+    GRID_SIZE = 50  # Shape of each square
+    GRID_MARGIN = 10  # Space between each square
+    grid = []
+
+    characterList = ["Cedric", "Mohamed", "David", "Jacob", "Fernando", "Roberto", "Munashe", "Gerald"]
+    # To do: Associate a character name for each rectangle
+    for row in range(GRID_ROWS):
+        grid_row = []
+        for column in range(GRID_COLS):
+            # Grid XY
+            x = column * (GRID_SIZE + GRID_MARGIN) + GRID_MARGIN + 80
+            y = row * (GRID_SIZE + GRID_MARGIN) + GRID_MARGIN + 100
+            rect = pygame.Rect(x, y, GRID_SIZE, GRID_SIZE)
+            grid_row.append(rect)
+        grid.append(grid_row)
+
+    def draw_grid():  # Draws the grid of characters
+        for ROW in range(GRID_ROWS):
+            for COL in range(GRID_COLS):
+                square = grid[ROW][COL]
+                if square.collidepoint(mouse_pos):
+                    # If cursor is over a square... highlights
+                    pygame.draw.rect(display, YELLOW, square)
+                else:
+                    pygame.draw.rect(display, GRAY, square)
+                pygame.draw.rect(display, BLACK, square, 1)
+                character_font = pygame.font.Font(None, 12)
+                character_text = character_font.render(characterList[ROW * GRID_COLS + COL], True, BLACK)
+                character_rect = character_text.get_rect(center=square.center)
+                display.blit(character_text, character_rect)
 
 
     running = True
@@ -109,8 +150,17 @@ def characterSelection():  # Replicate StartMenu and add more buttons and such
                     main()
                 elif back_button_rect.collidepoint(event.pos):
                     startMenu()
-        display.fill(BLACK)
+                for row in range(GRID_ROWS):
+                    for col in range(GRID_COLS):
+                        if grid[row][col].collidepoint(mouse_pos):
+                            # If you clicked on a square...
+                            print(characterList[row * GRID_COLS + col])
 
+
+        display.fill(BLACK)
+        mouse_pos = pygame.mouse.get_pos()
+        draw_grid()
+        display.blit(title, TITLE)
         display.blit(play_button, play_button_rect)
         display.blit(back_button, back_button_rect)
-        pygame.display.update()
+        pygame.display.flip()
