@@ -29,6 +29,9 @@ SKYBLUE = (3, 248, 252)
 # Background ^
 
 
+# Include a menu tab, that's opened by ESCAPE
+# Give the option to quit to menu, or change characters
+# gotta use a boolean called is_menu = True
 def main():
     user_name = intro_screen.characterSelection()
     # Character Object
