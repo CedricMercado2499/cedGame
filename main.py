@@ -35,6 +35,11 @@ def main():
     # Will have to move this into a new screen called gameplay
     # Along with other code related to character
 
+    font = pygame.font.Font(None, 15)
+    selection_render = font.render(userCharacter, True, BLACK)
+    selection_display = selection_render.get_rect(center=(selection_render.get_width(), selection_render.get_height()))
+
+
     while True:
         clock.tick(300)
 
@@ -44,9 +49,10 @@ def main():
                 sys.exit()
 
         character.move()
-
         display.fill((255, 255, 255))
         # ^ clears the screen every move
+        display.blit(selection_render, selection_display)
+
         character.draw(display)  # Draws character
         pygame.display.update()  # Updates screen
 
@@ -60,4 +66,5 @@ pygame.display.set_caption('Hi')
 
 intro_screen.introScreen()
 intro_screen.startMenu()
-# main()  # main() is currently used in startMenu -> start_button
+userCharacter = intro_screen.characterSelection()
+main()

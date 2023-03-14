@@ -3,6 +3,7 @@ import pygame
 import colors
 
 
+
 def introScreen():
     from main import display
 
@@ -42,7 +43,7 @@ def introScreen():
 
 def startMenu():
     # Either move this function to a separate module or rename this module
-    from main import display, main
+    from main import display
     BLACK = colors.BLACK
     WHITE = colors.WHITE
 
@@ -69,7 +70,7 @@ def startMenu():
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if start_button_rect.collidepoint(event.pos):
-                    characterSelection()
+                    return None
                 elif options_button_rect.collidepoint(event.pos):
                     print("OPTIONS")
                 elif quit_button_rect.collidepoint(event.pos):
@@ -85,13 +86,13 @@ def startMenu():
 
 def characterSelection():  # Replicate StartMenu and add more buttons and such
 
-    from main import display, main
+    from main import display
     # Probably don't need vv
     BLACK = colors.BLACK
     WHITE = colors.WHITE
     YELLOW = colors.YELLOW
     GRAY = colors.GRAY
-    RED = colors.RED
+    # RED = colors.RED
     GREEN = colors.GREEN
 
     font = pygame.font.Font(None, 20)
@@ -101,7 +102,8 @@ def characterSelection():  # Replicate StartMenu and add more buttons and such
     title = font.render(titleText, True, WHITE)
     TITLE = title.get_rect(center=(display.get_width() / 2, 50))
 
-    play_button_rect = play_button.get_rect(center=(display.get_width() - play_button.get_width(), play_button.get_height()))
+    play_button_rect = play_button.get_rect(
+        center=(display.get_width() - play_button.get_width(), play_button.get_height()))
     back_button_rect = back_button.get_rect(center=(back_button.get_width(), back_button.get_height()))
 
     # Griddy
@@ -112,7 +114,7 @@ def characterSelection():  # Replicate StartMenu and add more buttons and such
     grid = []
 
     characterList = ["Cedric", "Mohamed", "David", "Jacob", "Fernando", "Roberto", "Munashe", "Gerald"]
-    # To do: Associate a character name for each rectangle
+    character_font = pygame.font.Font(None, 12)
     for row in range(GRID_ROWS):
         grid_row = []
         for column in range(GRID_COLS):
@@ -127,38 +129,56 @@ def characterSelection():  # Replicate StartMenu and add more buttons and such
         for ROW in range(GRID_ROWS):
             for COL in range(GRID_COLS):
                 square = grid[ROW][COL]
+                character_text = character_font.render(characterList[ROW * GRID_COLS + COL], True, BLACK)
+                character_rect = character_text.get_rect(center=square.center)
+
                 if square.collidepoint(mouse_pos):
                     # If cursor is over a square... highlights
                     pygame.draw.rect(display, YELLOW, square)
+                elif selected == (ROW, COL):  # selects
+                    pygame.draw.rect(display, GREEN, square)
                 else:
                     pygame.draw.rect(display, GRAY, square)
+
                 pygame.draw.rect(display, BLACK, square, 1)
-                character_font = pygame.font.Font(None, 12)
-                character_text = character_font.render(characterList[ROW * GRID_COLS + COL], True, BLACK)
-                character_rect = character_text.get_rect(center=square.center)
                 display.blit(character_text, character_rect)
 
-
     running = True
+    selected = None
     while running:
+        mouse_pos = pygame.mouse.get_pos()
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
 
+        # BUG: Character Selection Screen runs twice...
+        # I have a feeling it's something to do with the variable selection
+        # Since nothing is selected initially...
+        # You need to select something then press play
+
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if play_button_rect.collidepoint(event.pos):
-                    main()
-                elif back_button_rect.collidepoint(event.pos):
-                    startMenu()
-                for row in range(GRID_ROWS):
-                    for col in range(GRID_COLS):
-                        if grid[row][col].collidepoint(mouse_pos):
-                            # If you clicked on a square...
-                            print(characterList[row * GRID_COLS + col])
+                if event.button == 1:  # Left Click
+                    for row in range(GRID_ROWS):
+                        for col in range(GRID_COLS):
+                            if grid[row][col].collidepoint(mouse_pos):
+                                selected = (row, col)
+                                selection = (characterList[row * GRID_COLS + col])
+                                print(selected)
+                                print(selection)
+                    if play_button_rect.collidepoint(event.pos):
+                        if selected is not None:
+                            return selection
+                        else:
+                            print("FAIL")  # Can delete
+                    if back_button_rect.collidepoint(event.pos):
+                        startMenu()
 
+                elif event.button == 3:  # Right click to unselect
+                    selected = None
 
+        # Drawing the screen
         display.fill(BLACK)
-        mouse_pos = pygame.mouse.get_pos()
         draw_grid()
         display.blit(title, TITLE)
         display.blit(play_button, play_button_rect)
