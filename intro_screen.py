@@ -153,11 +153,6 @@ def characterSelection():  # Replicate StartMenu and add more buttons and such
             if event.type == pygame.QUIT:
                 quit()
 
-        # BUG: Character Selection Screen runs twice...
-        # I have a feeling it's something to do with the variable selection
-        # Since nothing is selected initially...
-        # You need to select something then press play
-
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:  # Left Click
                     for row in range(GRID_ROWS):
