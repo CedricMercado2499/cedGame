@@ -45,3 +45,7 @@
 # Start menu is implemented with the help of ChatGPT...
 # I think the next hardest part is the character selection menu
 # Well, I think the menu is light work, but when you play different characters, then it's gonna be hard
+
+# March 14, 2023
+# Today's goal is a character selection screen
+# It should include main character selection, a button to return to start menu, and a start game button

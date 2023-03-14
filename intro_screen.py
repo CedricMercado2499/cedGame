@@ -69,7 +69,7 @@ def startMenu():
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if start_button_rect.collidepoint(event.pos):
-                    main()
+                    characterSelection()
                 elif options_button_rect.collidepoint(event.pos):
                     print("OPTIONS")
                 elif quit_button_rect.collidepoint(event.pos):
@@ -80,4 +80,37 @@ def startMenu():
         display.blit(options_button, options_button_rect)
         display.blit(quit_button, quit_button_rect)
         display.blit(title, TITLE)
+        pygame.display.update()
+
+
+def characterSelection():  # Replicate StartMenu and add more buttons and such
+
+    from main import display, main
+    BLACK = colors.BLACK
+    WHITE = colors.WHITE
+
+    font = pygame.font.Font(None, 20)
+    play_button = font.render("PLAY", True, WHITE)
+    back_button = font.render("BACK", True, WHITE)
+
+
+    play_button_rect = play_button.get_rect(center=(display.get_width() - play_button.get_width(), play_button.get_height()))
+    back_button_rect = back_button.get_rect(center=(back_button.get_width(), back_button.get_height()))
+
+
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                quit()
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if play_button_rect.collidepoint(event.pos):
+                    main()
+                elif back_button_rect.collidepoint(event.pos):
+                    startMenu()
+        display.fill(BLACK)
+
+        display.blit(play_button, play_button_rect)
+        display.blit(back_button, back_button_rect)
         pygame.display.update()
