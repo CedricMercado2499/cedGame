@@ -2,7 +2,7 @@
 ## created by mohamed and ced
 ## created on march 03, 2023
 
-### @==BEFORE PLAYING: Install Python > Install PyGame package==@
+### @==BEFORE PLAYING==@
 ### @--Install Python--@
 ### https://www.python.org/downloads/
 
