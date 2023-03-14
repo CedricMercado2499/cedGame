@@ -43,7 +43,7 @@ def introScreen():
 
 def startMenu():
     # Either move this function to a separate module or rename this module
-    from main import display
+    from main import display, main
     BLACK = colors.BLACK
     WHITE = colors.WHITE
 
@@ -70,6 +70,7 @@ def startMenu():
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if start_button_rect.collidepoint(event.pos):
+                    main()
                     return None
                 elif options_button_rect.collidepoint(event.pos):
                     print("OPTIONS")

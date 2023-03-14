@@ -1,16 +1,20 @@
 # User character
 import pygame
+import colors
+
+BLACK = colors.BLACK
 
 
 class UserCharacter:
-    def __init__(self, pos):
+    def __init__(self, pos, user_name):
         self.pos = pos
         self.width = 30
         self.height = 30
         self.color = (0, 0, 0)
         self.dirX = 0
         self.dirY = 0
-
+        # from main import user_name
+        self.user_name = user_name
         self.left = False
         self.right = False
         self.up = False
@@ -18,7 +22,6 @@ class UserCharacter:
 
         self.jump = True
         self.fall = False
-
 
     def move(self):
         keys = pygame.key.get_pressed()
@@ -50,6 +53,12 @@ class UserCharacter:
             self.up = False
             self.left = False
             self.right = False
+
+
+        if keys[pygame.K_ESCAPE]:  # Change character
+            from main import main
+            main()
+
 
         # idk if this is okay, but it works
         # Border
@@ -95,12 +104,16 @@ class UserCharacter:
 
         eyePos = (eyeX, eyeY)
 
+        font = pygame.font.Font(None, 15)
+        character_text = font.render(self.user_name, True, BLACK)
+        character_rect = character_text.get_rect(
+            center=(self.pos[0] + character_text.get_width() // 2.5, (self.pos[1] - character_text.get_height() * 3)))
 
         # Draw Body
         pygame.draw.rect(display, self.color, (*self.pos, self.width, self.height))
         # Draw Head
-        pygame.draw.rect(display, (100, 100, 100), (*headPos, self.width-10, self.height-10))
-
+        pygame.draw.rect(display, (100, 100, 100), (*headPos, self.width - 10, self.height - 10))
+        display.blit(character_text, character_rect)
         if self.up or self.down or self.left or self.right:
             # Draw eyes
             pygame.draw.rect(display, (100, 100, 100), (*eyePos, self.width - 20, self.height - 20))

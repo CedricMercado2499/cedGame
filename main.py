@@ -30,13 +30,14 @@ SKYBLUE = (3, 248, 252)
 
 
 def main():
+    user_name = intro_screen.characterSelection()
     # Character Object
-    character = UserCharacter([170, 270])
+    character = UserCharacter([170, 270], user_name)
     # Will have to move this into a new screen called gameplay
     # Along with other code related to character
 
     font = pygame.font.Font(None, 15)
-    selection_render = font.render(userCharacter, True, BLACK)
+    selection_render = font.render(user_name, True, BLACK)
     selection_display = selection_render.get_rect(center=(selection_render.get_width(), selection_render.get_height()))
 
 
@@ -66,5 +67,4 @@ pygame.display.set_caption('Hi')
 
 intro_screen.introScreen()
 intro_screen.startMenu()
-userCharacter = intro_screen.characterSelection()  # used in main function
 main()
