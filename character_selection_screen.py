@@ -16,7 +16,7 @@ from start_screen import startMenu
 def characterSelection():
     from main import display
 
-    font = pygame.font.Font(None, 20)
+    font = pygame.font.SysFont("fresansbold.tff", 20)
     play_text = font.render("PLAY", True, WHITE)
     back_text = font.render("BACK", True, WHITE)
     titleText = "Hi"
@@ -35,7 +35,7 @@ def characterSelection():
     grid = []
 
     characterList = ["Cedric", "Mohamed", "David", "Jacob", "Fernando", "Roberto", "Munashe", "Varun"]
-    character_font = pygame.font.Font(None, 12)
+    character_font = pygame.font.SysFont("fresansbold.tff", 12)
 
     for row in range(GRID_ROWS):
         grid_row = []

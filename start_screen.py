@@ -12,8 +12,8 @@ def startMenu():
     from main import display, main
 
     # Fonts
-    font = pygame.font.Font(None, 20)
-    titleFont = pygame.font.Font(None, 38)
+    font = pygame.font.SysFont("fresansbold.tff", 20)
+    titleFont = pygame.font.SysFont("fresansbold.tff", 38)
 
     # Render
     start_text = font.render("START", True, WHITE)

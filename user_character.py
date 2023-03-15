@@ -1,6 +1,7 @@
 # User character
 import pygame
 from colors import *
+from pygame.sprite import Sprite
 
 
 # Concept: if user_name is something
@@ -11,9 +12,10 @@ from colors import *
 # Implement physics (velocity)
 # Ways to organize code, separate blocks into functions
 
-class Player:
+class Player(Sprite):
 
     def __init__(self, pos, user_name):
+        super().__init__()  # Just in case there's multiple players
 
         self.pos = pos  # Position
         self.width = 30
@@ -39,6 +41,11 @@ class Player:
         self.jump_velocity = 0
         self.gravity = 0.25
 
+        self.image = pygame.Surface((self.width, self.height))
+        self.image.fill(self.color)
+        self.rect = self.image.get_rect()
+        self.rect.x = self.pos[0]
+        self.rect.y = self.pos[1]
 
     def move(self):
         keys = pygame.key.get_pressed()
@@ -110,7 +117,7 @@ class Player:
 
         eyePos = (eyeX, eyeY)
 
-        font = pygame.font.Font(None, 15)
+        font = pygame.font.SysFont("fresansbold.tff", 15)
         character_text = font.render(self.user_name, True, BLACK)
         character_rect = character_text.get_rect(
             center=(self.pos[0] + character_text.get_width() // 2.5, (self.pos[1] - character_text.get_height() * 3)))
@@ -123,3 +130,8 @@ class Player:
         if self.up or self.down or self.left or self.right:
             # Draw eyes
             pygame.draw.rect(display, (100, 100, 100), (*eyePos, self.width - 20, self.height - 20))
+
+    def update(self):
+        self.move()
+        self.rect.x = self.pos[0]
+        self.rect.y = self.pos[1]

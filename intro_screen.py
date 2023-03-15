@@ -11,7 +11,7 @@ def introScreen():
     from main import display
 
     # Intro text setup
-    intro_font = pygame.font.Font(None, 36)
+    intro_font = pygame.font.SysFont("freesansbold.tff", 36)
     intro_text = "Hi"
     # intro_text = "The Adventures of Cedybedy"
     intro = intro_font.render(intro_text, True, WHITE)
@@ -20,7 +20,7 @@ def introScreen():
     intro_timer = pygame.time.get_ticks()  # Time in milliseconds
 
     # Skip text setup
-    skip_font = pygame.font.Font(None, 15)
+    skip_font = pygame.font.SysFont("fresansbold.tff", 15)
     skip_text = "Press 'Esc' to skip"
     skip = skip_font.render(skip_text, True, (255, 255, 255))
 

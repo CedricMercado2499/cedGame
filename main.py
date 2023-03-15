@@ -5,10 +5,10 @@ from pygame.locals import *
 from colors import *
 
 # Screen Imports
-from user_character import Player
 from intro_screen import introScreen as intro
 from start_screen import startMenu as start
 from character_selection_screen import characterSelection as character_selection
+from user_character import Player
 
 # Variables
 WINDOW_WIDTH = 400  # 1000
@@ -29,14 +29,17 @@ display = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 def main():
     name = character_selection()  # Character selected is returned
     # Character Object
-    character = Player([170, 270], name)
     # Will have to move this into a new screen called gameplay
     # Along with other code related to character
 
+    player_group = pygame.sprite.Group()  # Just in case we add more players
+    player = Player(([100, 100]), name)
+    player_group.add(player)
+
 
     # Setting up a name above the character
-    font = pygame.font.Font(None, 15)
-    selection_render = font.render(name, True, BLACK)
+    # font = pygame.font.Font(None, 15)
+    # selection_render = font.render(name, True, BLACK)
 
     while True:
         clock.tick(250)  # This is basically game speed, the higher, the faster * Might include in options
@@ -46,10 +49,12 @@ def main():
                 pygame.quit()
                 quit()
 
-        character.move()  # From user_character.py
-        display.fill((255, 255, 255))  # Clears the screen after every move
+        player_group.update()  # Updates the sprite (in my cup)
 
-        character.draw(display)  # Draws character
+        display.fill(WHITE)  # Clears the screen after every move
+
+        player_group.draw(display)  # Draws the character sprite (in my cup)
+
         pygame.display.update()  # Updates screen
 
 
