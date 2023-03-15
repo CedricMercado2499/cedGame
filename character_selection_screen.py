@@ -65,6 +65,8 @@ def characterSelection():
                 pygame.draw.rect(display, BLACK, square, 1)
                 display.blit(character_text, character_rect)
 
+
+
     running = True
     selected = None
     while running:
@@ -97,6 +99,17 @@ def characterSelection():
                 elif event.button == 3:  # Right click will unselect any selected character
                     # Is this even needed?
                     selected = None
+
+                # Change button color when hovered
+            if play_button.collidepoint(mouse_pos):
+                play_text = font.render("PLAY", True, YELLOW)
+            else:
+                play_text = font.render("PLAY", True, WHITE)
+
+            if back_button.collidepoint(mouse_pos):
+                back_text = font.render("BACK", True, YELLOW)
+            else:
+                back_text = font.render("BACK", True, WHITE)
 
         # Drawing the screen
         display.fill(BLACK)

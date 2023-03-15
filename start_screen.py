@@ -17,7 +17,7 @@ def startMenu():
 
     # Render
     start_text = font.render("START", True, WHITE)
-    options_text = font.render("OPTIONS", True, RED)
+    options_text = font.render("OPTIONS", True, WHITE)
     quit_text = font.render("QUIT", True, WHITE)
     # titleText = "The Adventures of Cedybedy"
     titleText = "Hi"
@@ -31,6 +31,8 @@ def startMenu():
 
     running = True
     while running:
+        mouse_pos = pygame.mouse.get_pos()  # Gets mouse position
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -44,6 +46,21 @@ def startMenu():
                 elif quit_button.collidepoint(event.pos):
                     pygame.quit()
                     quit()
+                # Change button color when hovered
+            if start_button.collidepoint(mouse_pos):
+                start_text = font.render("START", True, RED)
+            else:
+                start_text = font.render("START", True, WHITE)
+
+            if options_button.collidepoint(mouse_pos):
+                options_text = font.render("OPTIONS", True, RED)
+            else:
+                options_text = font.render("OPTIONS", True, WHITE)
+
+            if quit_button.collidepoint(mouse_pos):
+                quit_text = font.render("QUIT", True, RED)
+            else:
+                quit_text = font.render("QUIT", True, WHITE)
 
         # Display screen and contents
         display.fill(BLACK)
