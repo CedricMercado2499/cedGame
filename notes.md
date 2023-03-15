@@ -19,7 +19,7 @@
 # a great challenge.
 
 # March 09, 2023
-# I created a movable square..
+# I created a movable square...
 # The goal now is to add borders and physics
 # The square shouldn't go out of bounds
 
@@ -55,3 +55,7 @@
 # I also have to rename main(), it doesn't feel like a main anymore y'know
 # My next goal is to clean up the code
 # This is going to be a pain, but it'll be more organized which makes it easier to add new stuff
+
+# March 15, 2023
+# No particular goal today, I think it's best if I clean up the code a bit
+# Continue on the character attributes and stuff like that

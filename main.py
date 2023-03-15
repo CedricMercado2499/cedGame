@@ -1,8 +1,15 @@
+# Imports
 import pygame
 import sys
 from pygame.locals import *
+from colors import *
+
+# Screen Imports
 from user_character import UserCharacter
-import intro_screen
+from intro_screen import introScreen as intro
+from start_screen import startMenu as start
+from character_selection_screen import characterSelection as character_selection
+
 # Variables
 WINDOW_WIDTH = 400  # 1000
 WINDOW_HEIGHT = 300  # 800
@@ -10,64 +17,52 @@ clock = pygame.time.Clock()
 
 # Window size
 display = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
-# making display global does not affect other modules
-# I want to be able to access display on every module
-# or find another way to display different visuals
 
-# Colors     R    G    B
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-BLUE = (0, 0, 255)
-SKYBLUE = (3, 248, 252)
-# Should I make separate file for colours?
-
-
-# Drawing
-# pygame.draw.rect(screen, GREEN, (0, 250, 400, 100))
-# Background ^
-
-
+# To Do:
 # Include a menu tab, that's opened by ESCAPE
 # Give the option to quit to menu, or change characters
 # gotta use a boolean called is_menu = True
+
+# Create a separate file and include main(), rename it to gameplay or something
+
+
 def main():
-    user_name = intro_screen.characterSelection()
+    name = character_selection()  # Character selected is returned
     # Character Object
-    character = UserCharacter([170, 270], user_name)
+    character = UserCharacter([170, 270], name)
     # Will have to move this into a new screen called gameplay
     # Along with other code related to character
 
-    font = pygame.font.Font(None, 15)
-    selection_render = font.render(user_name, True, BLACK)
-    selection_display = selection_render.get_rect(center=(selection_render.get_width(), selection_render.get_height()))
 
+    # Setting up a name above the character
+    font = pygame.font.Font(None, 15)
+    selection_render = font.render(name, True, BLACK)
 
     while True:
-        clock.tick(300)
+        clock.tick(250)  # This is basically game speed, the higher, the faster * Might include in options
 
         for event in pygame.event.get():  # Event handler
             if event.type == QUIT:
                 pygame.quit()
-                sys.exit()
+                quit()
 
-        character.move()
-        display.fill((255, 255, 255))
-        # ^ clears the screen every move
-        display.blit(selection_render, selection_display)
+        character.move()  # From user_character.py
+        display.fill((255, 255, 255))  # Clears the screen after every move
 
         character.draw(display)  # Draws character
         pygame.display.update()  # Updates screen
 
 
-# Run
+# Main Loop
 
-pygame.init()
+pygame.init()  # Starts up Pygame
+
+# Window Title
 pygame.display.set_caption('Hi')
-
 # pygame.display.set_caption('The Adventures of Cedybedy')
 
-intro_screen.introScreen()
-intro_screen.startMenu()
+
+# Intro Screen > Start Screen > Character Selection > main/gameplay
+intro()
+start()
 main()

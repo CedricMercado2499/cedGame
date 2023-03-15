@@ -2,7 +2,7 @@
 ## created by mohamed and ced
 ## created on march 03, 2023
 
-### @==BEFORE PLAYING==@
+### <u>BEFORE PLAYING</u>
 ### Install Python
 ### https://www.python.org/downloads/
 
