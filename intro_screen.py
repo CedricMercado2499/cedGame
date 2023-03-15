@@ -45,5 +45,3 @@ def introScreen():
         display.blit(skip, (0, 0))
 
         pygame.display.update()
-
-

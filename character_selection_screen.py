@@ -69,6 +69,7 @@ def characterSelection():
 
     running = True
     selected = None
+    selection = None
     while running:
         mouse_pos = pygame.mouse.get_pos()  # Gets mouse position
 
@@ -79,6 +80,14 @@ def characterSelection():
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:  # Left Click
+
+                    if play_button.collidepoint(event.pos):
+                        if selected is not None:
+                            return selection
+                        else:
+                            pass  # If no character is selected, don't show play button... something like that
+                    if back_button.collidepoint(event.pos):  # Back button returns to start menu
+                        startMenu()
                     for row in range(GRID_ROWS):
                         for col in range(GRID_COLS):
                             if grid[row][col].collidepoint(mouse_pos):
@@ -88,18 +97,19 @@ def characterSelection():
                                 # print(selected)
                                 # print(selection)
 
-                    if play_button.collidepoint(event.pos):
-                        if selected is not None:
-                            return selection
-                        else:
-                            pass  # If no character is selected, don't show play button... something like that
-                    if back_button.collidepoint(event.pos):  # Back button returns to start menu
-                        startMenu()
-
                 elif event.button == 3:  # Right click will unselect any selected character
                     # Is this even needed?
                     selected = None
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:  # Left Click
+                    for row in range(GRID_ROWS):
+                        for col in range(GRID_COLS):
+                            if grid[row][col].collidepoint(mouse_pos):
+                                selected = (row, col)
+                                selection = (characterList[row * GRID_COLS + col])
 
+                                # print(selected)
+                                # print(selection)
                 # Change button color when hovered
             if play_button.collidepoint(mouse_pos):
                 play_text = font.render("PLAY", True, YELLOW)

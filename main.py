@@ -1,6 +1,6 @@
 # Imports
 import pygame
-import sys
+# import sys
 from pygame.locals import *
 from colors import *
 

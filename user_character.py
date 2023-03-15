@@ -63,7 +63,7 @@ class Player(Sprite):
                 self.skin = SKIN_WHITE
                 self.width = 30
                 self.height = 44
-            case other:
+            case _:
                 self.skin = GRAY
                 self.width = 30
                 self.height = 30

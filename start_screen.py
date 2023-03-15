@@ -9,7 +9,7 @@ from colors import *
 
 def startMenu():
     # Either move this function to a separate module or rename this module
-    from main import display, main
+    from main import display
 
     # Fonts
     font = pygame.font.SysFont("fresansbold.tff", 20)
