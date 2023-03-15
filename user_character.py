@@ -24,18 +24,49 @@ class Player(Sprite):
         self.pos = pos  # Position
         self.width = 30
         self.height = 30
-        self.color = BLACK
+
+        self.color = BLACK  # Don't need
 
         self.user_name = user_name
 
-        if user_name == "Mohamed" or user_name == "Munashe":
-            self.skin = SKIN_BLACK
-        elif user_name == "Cedric" or user_name == "Roberto" or user_name == "Fernando":
-            self.skin = SKIN_ASIAN
-        elif user_name == "Varun":
-            self.skin = SKIN_BROWN
-        else:
-            self.skin = SKIN_WHITE
+        match user_name:  # Basically a switch statement, way cleaner than multiple if-else statements
+            case 'Mohamed':
+                self.skin = SKIN_BLACK
+                self.width = 40
+                self.height = 50
+            case 'Munashe':
+                self.skin = SKIN_BLACK
+                self.width = 40
+                self.height = 45
+            case 'Cedric':
+                self.skin = SKIN_ASIAN
+                self.width = 37
+                self.height = 45
+                # self.jump_height = -10
+            case 'Roberto':
+                self.skin = SKIN_ASIAN
+                self.width = 35
+                self.height = 35
+            case 'Varun':
+                self.skin = SKIN_BROWN
+                self.width = 35
+                self.height = 44
+            case 'Fernando':
+                self.skin = SKIN_ASIAN
+                self.width = 40
+                self.height = 40
+            case 'David':
+                self.skin = SKIN_WHITE
+                self.width = 30
+                self.height = 50
+            case 'Jacob':
+                self.skin = SKIN_WHITE
+                self.width = 30
+                self.height = 44
+            case other:
+                self.skin = GRAY
+                self.width = 30
+                self.height = 30
 
         # Character Movement Booleans
         self.left = False
@@ -45,12 +76,22 @@ class Player(Sprite):
         self.jumping = False
         self.falling = False
 
+        # # Dash -> Work in progress
+        # self.dashing = False
+        # self.dash_timer = 0
+        # self.dash_cd = 1000
+
         # Jumping
         self.jump_velocity = 0
         self.gravity = 0.25
+        self.jump_cd = 1500
+        self.jump_timer = 0
+        self.jump_height = -7
 
+
+        # Player Model
         self.image = pygame.Surface((self.width, self.height))
-        self.image.fill(self.color)
+        self.image.fill(self.skin)
         self.rect = self.image.get_rect()
         self.rect.x = self.pos[0]
         self.rect.y = self.pos[1]
@@ -97,18 +138,17 @@ class Player(Sprite):
         # jump_timer = pygame.time.get_ticks()
         if self.pos[1] + self.height > WINDOW_HEIGHT:
             self.pos[1] = WINDOW_HEIGHT - self.height
-            # if pygame.time.get_ticks() - jump_timer > jump_cd:
             self.jumping = True
             # if character is on the floor, jump
             # must change when applying platforms
         # Movement Functions
 
-    def move_left(self):
-        self.pos[0] -= 0.7
+    def move_left(self, speed=0.7):
+        self.pos[0] -= speed
         self.left, self.right, self.up, self.down = True, False, False, False
 
-    def move_right(self):
-        self.pos[0] += 0.7
+    def move_right(self, speed=0.7):
+        self.pos[0] += speed
         self.left, self.right, self.up, self.down = False, True, False, False
 
     def look_up(self):
@@ -118,11 +158,13 @@ class Player(Sprite):
         self.left, self.right, self.up, self.down = False, False, False, True
 
     def do_jump(self):
-        if self.jumping:
-            self.jump_velocity = -7  # Change this to inc/dec jump
+        current_time = pygame.time.get_ticks()
+        if current_time - self.jump_timer >= self.jump_cd:
+            self.jump_velocity = self.jump_height
             self.jumping = False
+            self.jump_timer = current_time
 
-    def draw(self, display):
+    def draw(self, display):  # Drawing Player Model
         headPos = (self.rect.x + 5, self.rect.y - 20)
         eyePos = (self.rect.x, self.rect.y)
 
@@ -141,13 +183,15 @@ class Player(Sprite):
             center=(self.rect.x + character_text.get_width() // 2.5, (self.rect.y - character_text.get_height() * 3)))
 
         # Draw Body
-        pygame.draw.rect(display, self.color, (*self.pos, self.width, self.height))
-        # Draw Head
-        pygame.draw.rect(display, self.skin, (*headPos, self.width - 10, self.height - 10))
-        display.blit(character_text, character_rect)
-        if self.up or self.down or self.left or self.right:
-            # Draw eyes
-            pygame.draw.rect(display, self.skin, (*eyePos, self.width - 20, self.height - 25))
+        pygame.draw.rect(display, self.skin, (*self.pos, self.width, self.height))
+
+        # # Draw Head
+        # pygame.draw.rect(display, self.skin, (*headPos, self.width - 10, self.height - 10))
+        # display.blit(character_text, character_rect)
+        # if self.up or self.down or self.left or self.right:
+        #     # Draw eyes
+        #     pygame.draw.rect(display, self.skin, (*eyePos, self.width - 20, self.height - 25))
+
     # add a circle
 
     def update(self):

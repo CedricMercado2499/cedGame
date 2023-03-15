@@ -85,8 +85,8 @@ def characterSelection():
                                 selected = (row, col)
                                 selection = (characterList[row * GRID_COLS + col])
 
-                                print(selected)
-                                print(selection)
+                                # print(selected)
+                                # print(selection)
 
                     if play_button.collidepoint(event.pos):
                         if selected is not None:
