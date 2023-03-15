@@ -32,9 +32,7 @@ def main():
     # Will have to move this into a new screen called gameplay
     # Along with other code related to character
 
-    player_group = pygame.sprite.Group()  # Just in case we add more players
     player = Player(([100, 100]), name)
-    player_group.add(player)
 
 
     # Setting up a name above the character
@@ -49,11 +47,11 @@ def main():
                 pygame.quit()
                 quit()
 
-        player_group.update()  # Updates the sprite (in my cup)
+        player.update()  # Updates the sprite (in my cup)
 
         display.fill(WHITE)  # Clears the screen after every move
 
-        player_group.draw(display)  # Draws the character sprite (in my cup)
+        player.draw(display)  # Draws the character sprite (in my cup)
 
         pygame.display.update()  # Updates screen
 

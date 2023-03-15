@@ -95,32 +95,24 @@ class Player(Sprite):
 
     # import main.py width
     def draw(self, display):
-        headX = self.pos[0] + 5
-        headY = self.pos[1] - 20
-        headPos = (headX, headY)
 
-        eyeX = 0
-        eyeY = 0
+        headPos = (self.rect.x + 5, self.rect.y - 20)
+        eyePos = (self.rect.x, self.rect.y)
 
         if self.right:
-            eyeX = self.pos[0] + 20
-            eyeY = self.pos[1] - 15
+            eyePos = (self.rect.x + 20, self.rect.y - 15)
         if self.left:
-            eyeX = self.pos[0]
-            eyeY = self.pos[1] - 15
+            eyePos = (self.rect.x, self.rect.y - 15)
         if self.up:
-            eyeX = self.pos[0] + 10
-            eyeY = self.pos[1] - 25
+            eyePos = (self.rect.x + 10, self.rect.y - 25)
         if self.down:
-            eyeX = self.pos[0] + 10
-            eyeY = self.pos[1] - 5
-
-        eyePos = (eyeX, eyeY)
+            eyePos = (self.rect.x + 10, self.rect.y - 5)
 
         font = pygame.font.SysFont("fresansbold.tff", 15)
         character_text = font.render(self.user_name, True, BLACK)
         character_rect = character_text.get_rect(
-            center=(self.pos[0] + character_text.get_width() // 2.5, (self.pos[1] - character_text.get_height() * 3)))
+            center=(self.rect.x + character_text.get_width() // 2.5, (self.rect.y - character_text.get_height() * 3)))
+
 
         # Draw Body
         pygame.draw.rect(display, self.color, (*self.pos, self.width, self.height))
