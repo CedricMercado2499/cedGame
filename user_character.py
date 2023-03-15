@@ -8,9 +8,8 @@ from pygame.sprite import Sprite
 # function call of that character
 # Example: if user_name == "Cedric": give Cedric abilities/visual
 
-# Use Pygame.sprite
-# Implement physics (velocity)
-# Ways to organize code, separate blocks into functions
+# Create different surfaces for character (head/body/etc) yesno?
+# Create more attributes for different characters (body types)
 
 def open_options():  # Work-In-Progress, Options Menu isn't created, currently goes back to character selection
     from main import main
@@ -20,7 +19,7 @@ def open_options():  # Work-In-Progress, Options Menu isn't created, currently g
 class Player(Sprite):
 
     def __init__(self, pos, user_name):
-        super().__init__()  # Just in case there's multiple players
+        super().__init__()  # 'super' -> just in case there's multiple characters in play
 
         self.pos = pos  # Position
         self.width = 30
@@ -90,7 +89,7 @@ class Player(Sprite):
             self.pos[1] = WINDOW_HEIGHT - self.height
 
     def apply_gravity(self):
-        from main import WINDOW_HEIGHT, WINDOW_WIDTH
+        from main import WINDOW_HEIGHT
         # Gravity V2
         self.jump_velocity += self.gravity
         self.pos[1] += self.jump_velocity
@@ -128,13 +127,13 @@ class Player(Sprite):
         eyePos = (self.rect.x, self.rect.y)
 
         if self.right:
-            eyePos = (self.rect.x + 20, self.rect.y - 15)
+            eyePos = (self.rect.x + 18, self.rect.y - 12.5)
         if self.left:
-            eyePos = (self.rect.x, self.rect.y - 15)
+            eyePos = (self.rect.x + 2, self.rect.y - 12.5)
         if self.up:
             eyePos = (self.rect.x + 10, self.rect.y - 25)
         if self.down:
-            eyePos = (self.rect.x + 10, self.rect.y - 5)
+            eyePos = (self.rect.x + 10, self.rect.y)
 
         font = pygame.font.SysFont("fresansbold.tff", 15)
         character_text = font.render(self.user_name, True, BLACK)
@@ -148,10 +147,11 @@ class Player(Sprite):
         display.blit(character_text, character_rect)
         if self.up or self.down or self.left or self.right:
             # Draw eyes
-            pygame.draw.rect(display, (100, 100, 100), (*eyePos, self.width - 20, self.height - 20))
+            pygame.draw.rect(display, self.skin, (*eyePos, self.width - 20, self.height - 25))
+    # add a circle
 
     def update(self):
-        self.update_position()
-        self.apply_gravity()
         self.rect.x = self.pos[0]
         self.rect.y = self.pos[1]
+        self.update_position()
+        self.apply_gravity()
