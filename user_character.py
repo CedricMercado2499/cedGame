@@ -7,69 +7,65 @@ from colors import *
 # function call of that character
 # Example: if user_name == "Cedric": give Cedric abilities/visual
 
-class UserCharacter:
+# Use Pygame.sprite
+# Implement physics (velocity)
+# Ways to organize code, separate blocks into functions
+
+class Player:
 
     def __init__(self, pos, user_name):
 
-        self.pos = pos
+        self.pos = pos  # Position
         self.width = 30
         self.height = 30
-        self.color = (0, 0, 0)
-        self.dirX = 0
-        self.dirY = 0
+        self.color = BLACK
 
         self.user_name = user_name
 
-        if user_name == "Mohamed":
+        if user_name == "Mohamed" or user_name == "Munashe":
             self.skin = BLACK
         else:
             self.skin = SKIN_WHITE
-
 
         # Character Movement Booleans
         self.left = False
         self.right = False
         self.up = False
         self.down = False
-        self.jump = True
-        self.fall = False
+        self.jumping = False
+        self.falling = False
+
+        # Jumping
+        self.jump_velocity = 0
+        self.gravity = 0.25
+
 
     def move(self):
         keys = pygame.key.get_pressed()
+
         if keys[pygame.K_LEFT] or keys[pygame.K_a]:
             self.pos[0] -= 0.7
-            self.left = True
-            self.right = False
-            self.up = False
-            self.down = False
+            self.left, self.right, self.up, self.down = True, False, False, False
+
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             self.pos[0] += 0.7
-            self.right = True
-            self.left = False
-            self.up = False
-            self.down = False
+            self.left, self.right, self.up, self.down = False, True, False, False
+
         if keys[pygame.K_UP] or keys[pygame.K_w]:
-            self.up = True
-            self.down = False
-            self.left = False
-            self.right = False
-        if keys[pygame.K_SPACE] and self.jump:
-            for i in range(100):
-                self.pos[1] -= 0.5  # Jump height
-            self.jump = False
-            self.fall = True
+            self.left, self.right, self.up, self.down = False, False, True, False
+
+        if keys[pygame.K_SPACE]:
+            if self.jumping:
+                self.jump_velocity = -7  # Change this to inc/dec jump
+                self.jumping = False
+
         if keys[pygame.K_DOWN] or keys[pygame.K_s]:
-            # self.pos[1] += 1 # Let gravity do the work
-            self.down = True
-            self.up = False
-            self.left = False
-            self.right = False
+            self.left, self.right, self.up, self.down = False, False, False, True
 
         if keys[pygame.K_ESCAPE]:  # Change character
             from main import main
             main()
 
-        # idk if this is okay, but it works
         # Border
         from main import WINDOW_HEIGHT, WINDOW_WIDTH
         if self.pos[0] < 0:
@@ -81,11 +77,12 @@ class UserCharacter:
         elif self.pos[1] + self.height > WINDOW_HEIGHT:
             self.pos[1] = WINDOW_HEIGHT - self.height
 
-        # Gravity??
-        if self.pos[1] < WINDOW_HEIGHT - self.height and self.fall:
-            self.pos[1] += 0.4
-        elif self.pos[1] == WINDOW_HEIGHT - self.height:
-            self.jump = True
+        # Gravity V2
+        self.jump_velocity += self.gravity
+        self.pos[1] += self.jump_velocity
+        if self.pos[1] + self.height > WINDOW_HEIGHT:
+            self.pos[1] = WINDOW_HEIGHT - self.height
+            self.jumping = True
             # if character is on the floor, jump
             # must change when applying platforms
 
@@ -121,7 +118,7 @@ class UserCharacter:
         # Draw Body
         pygame.draw.rect(display, self.color, (*self.pos, self.width, self.height))
         # Draw Head
-        pygame.draw.rect(display, (self.skin), (*headPos, self.width - 10, self.height - 10))
+        pygame.draw.rect(display, self.skin, (*headPos, self.width - 10, self.height - 10))
         display.blit(character_text, character_rect)
         if self.up or self.down or self.left or self.right:
             # Draw eyes

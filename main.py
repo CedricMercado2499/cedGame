@@ -5,7 +5,7 @@ from pygame.locals import *
 from colors import *
 
 # Screen Imports
-from user_character import UserCharacter
+from user_character import Player
 from intro_screen import introScreen as intro
 from start_screen import startMenu as start
 from character_selection_screen import characterSelection as character_selection
@@ -29,7 +29,7 @@ display = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 def main():
     name = character_selection()  # Character selected is returned
     # Character Object
-    character = UserCharacter([170, 270], name)
+    character = Player([170, 270], name)
     # Will have to move this into a new screen called gameplay
     # Along with other code related to character
 
