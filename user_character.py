@@ -25,7 +25,7 @@ class Player(Sprite):
         self.width = 30
         self.height = 30
 
-        self.color = BLACK  # Don't need
+        self.shirt_color = BLACK  # Don't need
 
         self.user_name = user_name
 
@@ -83,10 +83,10 @@ class Player(Sprite):
 
         # Jumping
         self.jump_velocity = 0
-        self.gravity = 0.25
-        self.jump_cd = 1500
+        self.gravity = 0.5
+        self.jump_cd = 500  # 0.5 seconds cooldown
         self.jump_timer = 0
-        self.jump_height = -7
+        self.jump_height = -10
 
 
         # Player Model
@@ -182,8 +182,10 @@ class Player(Sprite):
         character_rect = character_text.get_rect(
             center=(self.rect.x + character_text.get_width() // 2.5, (self.rect.y - character_text.get_height() * 3)))
 
+        shirtPos = (self.pos[0], self.pos[1] + (self.height / 3))
         # Draw Body
         pygame.draw.rect(display, self.skin, (*self.pos, self.width, self.height))
+        pygame.draw.rect(display, self.shirt_color, (*shirtPos, self.width, self.height - (self.height / 3)))
 
         # # Draw Head
         # pygame.draw.rect(display, self.skin, (*headPos, self.width - 10, self.height - 10))
