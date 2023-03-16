@@ -49,4 +49,8 @@
 #   Special: PS Controller - Throws a controller (Ranged) 
 #   Ultimate: Rocket League -Allows character to drive a car that can deal damage when colliding with players
 
+# Mohamed ():
+#   Basic: Fists - from fighting gym robber (Melee)
+#   Special: Soccer Ball
+#   Ultimate: Rage Quit - Goes on a mad state dealing extra damage
 # Moe's Character Ideas -------------------------

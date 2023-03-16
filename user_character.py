@@ -30,39 +30,39 @@ class Player(Sprite):
         self.user_name = user_name
 
         match user_name:  # Basically a switch statement, way cleaner than multiple if-else statements
-            case 'Mohamed':
-                self.skin = SKIN_BLACK
-                self.width = 40
-                self.height = 50
-            case 'Munashe':
-                self.skin = SKIN_BLACK
-                self.width = 40
-                self.height = 45
-            case 'Cedric':
-                self.skin = SKIN_ASIAN
-                self.width = 37
-                self.height = 45
-                # self.jump_height = -10
-            case 'Roberto':
-                self.skin = SKIN_ASIAN
-                self.width = 35
-                self.height = 35
-            case 'Varun':
-                self.skin = SKIN_BROWN
-                self.width = 35
-                self.height = 44
-            case 'Fernando':
-                self.skin = SKIN_ASIAN
-                self.width = 40
-                self.height = 40
-            case 'David':
-                self.skin = SKIN_WHITE
-                self.width = 30
-                self.height = 50
-            case 'Jacob':
-                self.skin = SKIN_WHITE
-                self.width = 30
-                self.height = 44
+            # case 'Mohamed':
+            #     self.skin = SKIN_BLACK
+            #     self.width = 40
+            #     self.height = 50
+            # case 'Munashe':
+            #     self.skin = SKIN_BLACK
+            #     self.width = 40
+            #     self.height = 45
+            # case 'Cedric':
+            #     self.skin = SKIN_ASIAN
+            #     self.width = 37
+            #     self.height = 45
+            #     # self.jump_height = -10
+            # case 'Roberto':
+            #     self.skin = SKIN_ASIAN
+            #     self.width = 35
+            #     self.height = 35
+            # case 'Varun':
+            #     self.skin = SKIN_BROWN
+            #     self.width = 35
+            #     self.height = 44
+            # case 'Fernando':
+            #     self.skin = SKIN_ASIAN
+            #     self.width = 40
+            #     self.height = 40
+            # case 'David':
+            #     self.skin = SKIN_WHITE
+            #     self.width = 30
+            #     self.height = 50
+            # case 'Jacob':
+            #     self.skin = SKIN_WHITE
+            #     self.width = 30
+            #     self.height = 44
             case _:
                 self.skin = GRAY
                 self.width = 30
@@ -88,15 +88,27 @@ class Player(Sprite):
         self.jump_timer = 0
         self.jump_height = -10
 
-
         # Player Model
         self.image = pygame.Surface((self.width, self.height))
         self.image.fill(self.skin)
-        self.rect = self.image.get_rect()
-        self.rect.x = self.pos[0]
-        self.rect.y = self.pos[1]
+        self.body = self.image.get_rect()
+        self.body.x = self.pos[0]
+        self.body.y = self.pos[1]
 
-    # Keybind Movement
+        self.left_arm_pos = (self.pos[0] - 10, self.pos[1] + self.height / 2 - 5)
+        self.left_arm = pygame.Surface((10, 30))
+        self.left_arm.fill(BLACK)
+
+        self.right_arm_pos = (self.pos[0] + self.width, self.pos[1] + self.height / 2 - 5)
+        self.right_arm = pygame.Surface((10, 30))
+        self.right_arm.fill(BLACK)
+
+        # Keybind Movement
+
+    def update_arms(self):
+        self.left_arm_pos = (self.pos[0] - 10, self.pos[1] + self.height / 2 - 5)
+        self.right_arm_pos = (self.pos[0] + self.width, self.pos[1] + self.height / 2 - 5)
+
     def update_position(self):
         keys = pygame.key.get_pressed()
 
@@ -165,31 +177,32 @@ class Player(Sprite):
             self.jump_timer = current_time
 
     def draw(self, display):  # Drawing Player Model
-        headPos = (self.rect.x + 5, self.rect.y - 20)
-        eyePos = (self.rect.x, self.rect.y)
+        headPos = (self.body.x + 5, self.body.y - 20)
+        eyePos = (self.body.x, self.body.y)
 
         if self.right:
-            eyePos = (self.rect.x + 18, self.rect.y - 12.5)
+            eyePos = (self.body.x + 18, self.body.y - 12.5)
         if self.left:
-            eyePos = (self.rect.x + 2, self.rect.y - 12.5)
+            eyePos = (self.body.x + 2, self.body.y - 12.5)
         if self.up:
-            eyePos = (self.rect.x + 10, self.rect.y - 25)
+            eyePos = (self.body.x + 10, self.body.y - 25)
         if self.down:
-            eyePos = (self.rect.x + 10, self.rect.y)
+            eyePos = (self.body.x + 10, self.body.y)
 
         font = pygame.font.SysFont("fresansbold.tff", 15)
         character_text = font.render(self.user_name, True, BLACK)
         character_rect = character_text.get_rect(
-            center=(self.rect.x + character_text.get_width() // 2.5, (self.rect.y - character_text.get_height() * 3)))
+            center=(self.body.x + character_text.get_width() // 2.5, (self.body.y - character_text.get_height() * 3)))
 
-        shirtPos = (self.pos[0], self.pos[1] + (self.height / 3))
+        # shirtPos = (self.pos[0], self.pos[1] + (self.height / 3))
         # Draw Body
         pygame.draw.rect(display, self.skin, (*self.pos, self.width, self.height))
-        pygame.draw.rect(display, self.shirt_color, (*shirtPos, self.width, self.height - (self.height / 3)))
-
+        # pygame.draw.rect(display, self.shirt_color, (*shirtPos, self.width, self.height - (self.height / 3)))
+        display.blit(self.left_arm, self.left_arm_pos)
+        display.blit(self.right_arm, self.right_arm_pos)
         # # Draw Head
         # pygame.draw.rect(display, self.skin, (*headPos, self.width - 10, self.height - 10))
-        # display.blit(character_text, character_rect)
+        display.blit(character_text, character_rect)
         # if self.up or self.down or self.left or self.right:
         #     # Draw eyes
         #     pygame.draw.rect(display, self.skin, (*eyePos, self.width - 20, self.height - 25))
@@ -197,7 +210,8 @@ class Player(Sprite):
     # add a circle
 
     def update(self):
-        self.rect.x = self.pos[0]
-        self.rect.y = self.pos[1]
+        self.body.x = self.pos[0]
+        self.body.y = self.pos[1]
+        self.update_arms()
         self.update_position()
         self.apply_gravity()

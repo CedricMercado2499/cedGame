@@ -59,3 +59,8 @@
 # March 15, 2023
 # No particular goal today, I think it's best if I clean up the code a bit
 # Continue on the character attributes and stuff like that
+
+# March 16, 2023
+# Codes a bit cleaner, not sure what my next steps are
+# I can implement a map selection screen, add more configurable attributes for each character, make a health system, or create character abilities
+# Let me try making some special attacks
