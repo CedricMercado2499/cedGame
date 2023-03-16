@@ -12,7 +12,7 @@ from pygame.sprite import Sprite
 # Create more attributes for different characters (body types)
 
 def open_options():  # Work-In-Progress, Options Menu isn't created, currently goes back to character selection
-    from main import main
+    from gameplay import main
     main()
 
 
