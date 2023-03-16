@@ -20,7 +20,6 @@ def main(display):
 
     player = Player(([100, 100]), name)
 
-
     # Setting up a name above the character
     # font = pygame.font.Font(None, 15)
     # selection_render = font.render(name, True, BLACK)

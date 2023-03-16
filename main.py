@@ -6,9 +6,6 @@ from intro_screen import introScreen as intro
 from start_screen import startMenu as start
 from gameplay import main as gameplay
 
-# Object Imports
-from user_character import Player
-
 # Variables
 WINDOW_WIDTH = 400  # 1000
 WINDOW_HEIGHT = 300  # 800
