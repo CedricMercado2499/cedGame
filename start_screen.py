@@ -43,7 +43,7 @@ def startMenu():
                     selected_button = (selected_button + 1) % 3
                 elif event.key == pygame.K_RETURN:
                     if selected_button == 0:
-                        return None
+                        return "character"
                     elif selected_button == 1:
                         # Options
                         pass
@@ -75,3 +75,4 @@ def startMenu():
         display.blit(quit_text, quit_button)
 
         pygame.display.update()
+

@@ -13,19 +13,18 @@ from start_screen import startMenu
 # Surfaces are similar to screen size, but it can be any size, and you can have multiple surfaces
 
 
+# Character Selection: With the interface, you can navigate with WASD within the character list
+# Next steps: If player chooses the change character...
+# from gameplay > open_options highlight used character
+
 def characterSelection():
     from main import display
 
     font = pygame.font.SysFont("fresansbold.tff", 20)
-    play_text = font.render("PLAY", True, WHITE)
-    back_text = font.render("BACK", True, WHITE)
     titleText = "Hi"
     title_text = font.render(titleText, True, WHITE)
     TITLE = title_text.get_rect(center=(display.get_width() / 2, 50))
 
-
-    play_button = play_text.get_rect(center=(display.get_width() - play_text.get_width(), play_text.get_height()))
-    back_button = back_text.get_rect(center=(back_text.get_width(), back_text.get_height()))
 
     # Griddy
     GRID_ROWS = 2  # Rows
@@ -54,77 +53,109 @@ def characterSelection():
                 character_text = character_font.render(characterList[ROW * GRID_COLS + COL], True, BLACK)
                 character_rect = character_text.get_rect(center=square.center)
 
-                if square.collidepoint(mouse_pos):
-                    # If cursor is over a square... highlights
-                    pygame.draw.rect(display, YELLOW, square)
-                elif selected == (ROW, COL):  # selects
-                    pygame.draw.rect(display, GREEN, square)
+
+                if not confirm_quit:
+                    if selected == (ROW, COL):  # selects
+                        pygame.draw.rect(display, GREEN, square)
+                    else:
+                        pygame.draw.rect(display, GRAY, square)
                 else:
                     pygame.draw.rect(display, GRAY, square)
 
                 pygame.draw.rect(display, BLACK, square, 1)
                 display.blit(character_text, character_rect)
 
+        if confirm_selection:
 
+            play_text = font.render("PLAY", True, RED)
+        else:
+            play_text = font.render("PLAY", True, WHITE)
+        if confirm_quit:  # Change
+            back_text = font.render("BACK", True, RED)
+        else:
+            back_text = font.render("BACK", True, WHITE)
+
+        play_button = play_text.get_rect(center=(display.get_width() - play_text.get_width(), play_text.get_height()))
+        back_button = back_text.get_rect(center=(back_text.get_width(), back_text.get_height()))
+        display.blit(play_text, play_button)
+        display.blit(back_text, back_button)
 
     running = True
+    # selected = (0, 0)
+    # selection = characterList[0]
+
     selected = None
     selection = None
+    back_selected = False
+    confirm_selection = False
+    confirm_quit = False
+
     while running:
-        mouse_pos = pygame.mouse.get_pos()  # Gets mouse position
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
 
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if event.button == 1:  # Left Click
+            if event.type == pygame.KEYDOWN:
+                if selection is not None:
+                    if not confirm_selection and not confirm_quit:
+                        if event.key == pygame.K_w:  # Up
+                            if selected[0] > 0:
+                                selected = (selected[0] - 1, selected[1])
+                        if event.key == pygame.K_s:  # Down
+                            if selected[0] < GRID_ROWS - 1:
+                                selected = (selected[0] + 1, selected[1])
+                        if event.key == pygame.K_a:  # Left
+                            if selected[1] > 0:
+                                selected = (selected[0], selected[1] - 1)
+                        if event.key == pygame.K_d:  # Right
+                            if selected[1] < GRID_COLS - 1:
+                                selected = (selected[0], selected[1] + 1)
 
-                    if play_button.collidepoint(event.pos):
-                        if selected is not None:
-                            return selection
+                    if event.key == pygame.K_ESCAPE:
+                        if confirm_selection:  # Handles confirm_selection
+                            confirm_selection = False
+
+                        if not confirm_quit:
+                            confirm_quit = True
                         else:
-                            pass  # If no character is selected, don't show play button... something like that
-                    if back_button.collidepoint(event.pos):  # Back button returns to start menu
+                            confirm_quit = False
+
+                    elif event.key == pygame.K_RETURN:
+                        if not confirm_selection:   # Handles confirm_selection
+                            confirm_selection = True
+                        else:                   # Handles confirm_selection
+                            return selection
+
+                        if confirm_quit:
+                            back_selected = True
+
+                    selection = (characterList[selected[0] * 4 + selected[1]])
+
+                else:
+                    selected = (0, 0)
+                    selection = characterList[0]
+
+            if back_selected:
+                selected = None
+                selection = None
+                if event.key == pygame.K_RETURN:
+                    back_selected  = False
+                    confirm_selection = False
+                    if confirm_quit:  # Resets if either is selected
+                        confirm_quit = False
+
                         startMenu()
-                    for row in range(GRID_ROWS):
-                        for col in range(GRID_COLS):
-                            if grid[row][col].collidepoint(mouse_pos):
-                                selected = (row, col)
-                                selection = (characterList[row * GRID_COLS + col])
+                else:
+                    pass
 
-                                # print(selected)
-                                # print(selection)
 
-                elif event.button == 3:  # Right click will unselect any selected character
-                    # Is this even needed?
-                    selected = None
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if event.button == 1:  # Left Click
-                    for row in range(GRID_ROWS):
-                        for col in range(GRID_COLS):
-                            if grid[row][col].collidepoint(mouse_pos):
-                                selected = (row, col)
-                                selection = (characterList[row * GRID_COLS + col])
 
-                                # print(selected)
-                                # print(selection)
-                # Change button color when hovered
-            if play_button.collidepoint(mouse_pos):
-                play_text = font.render("PLAY", True, YELLOW)
-            else:
-                play_text = font.render("PLAY", True, WHITE)
 
-            if back_button.collidepoint(mouse_pos):
-                back_text = font.render("BACK", True, YELLOW)
-            else:
-                back_text = font.render("BACK", True, WHITE)
 
         # Drawing the screen
         display.fill(BLACK)
         draw_grid()
         display.blit(title_text, TITLE)
-        display.blit(play_text, play_button)
-        display.blit(back_text, back_button)
         pygame.display.flip()

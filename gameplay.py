@@ -13,16 +13,12 @@ clock = pygame.time.Clock()
 
 
 def main(display):
-    name = character_selection()  # Character selected is returned
+    name = character_selection()  # Character selected is returned \\ This is OOP right?
     # Character Object
-    # Will have to move this into a new screen called gameplay
-    # Along with other code related to character
 
     player = Player(([100, 100]), name)
 
-    # Setting up a name above the character
-    # font = pygame.font.Font(None, 15)
-    # selection_render = font.render(name, True, BLACK)
+
 
     while True:
         clock.tick(250)  # This is basically game speed, the higher, the faster * Might include in options
