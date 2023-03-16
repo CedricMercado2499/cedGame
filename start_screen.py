@@ -4,11 +4,9 @@ from colors import *
 
 # To Do:
 # Make options screen
-# Make it so that when mouse.pos is on any button, the button is highlighted
 
 
 def startMenu():
-    # Either move this function to a separate module or rename this module
     from main import display
 
     # Fonts
@@ -29,35 +27,41 @@ def startMenu():
     options_button = options_text.get_rect(center=(display.get_width() / 2, 150))
     quit_button = quit_text.get_rect(center=(display.get_width() / 2, 200))
 
+    selected_button = 0
     running = True
     while running:
-        mouse_pos = pygame.mouse.get_pos()  # Gets mouse position
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
 
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if start_button.collidepoint(event.pos):  # If start_text is clicked, returns None (ends start_screen.py)
-                    return None
-                elif options_button.collidepoint(event.pos):  # NEED TO DO
-                    pass
-                elif quit_button.collidepoint(event.pos):
-                    pygame.quit()
-                    quit()
-                # Change button color when hovered
-            if start_button.collidepoint(mouse_pos):
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_w:
+                    selected_button = (selected_button - 1) % 3
+                elif event.key == pygame.K_s:
+                    selected_button = (selected_button + 1) % 3
+                elif event.key == pygame.K_RETURN:
+                    if selected_button == 0:
+                        return None
+                    elif selected_button == 1:
+                        # Options
+                        pass
+                    elif selected_button == 2:
+                        pygame.quit()
+                        quit()
+            # Change button color when hovered
+            if selected_button == 0:
                 start_text = font.render("START", True, RED)
             else:
                 start_text = font.render("START", True, WHITE)
 
-            if options_button.collidepoint(mouse_pos):
+            if selected_button == 1:
                 options_text = font.render("OPTIONS", True, RED)
             else:
                 options_text = font.render("OPTIONS", True, WHITE)
 
-            if quit_button.collidepoint(mouse_pos):
+            if selected_button == 2:
                 quit_text = font.render("QUIT", True, RED)
             else:
                 quit_text = font.render("QUIT", True, WHITE)
