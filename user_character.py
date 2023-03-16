@@ -128,7 +128,7 @@ class Player(Sprite):
         if keys[pygame.K_SPACE]:
             self.do_jump()
 
-        if keys[pygame.K_ESCAPE]:  # Change character
+        if keys[pygame.K_ESCAPE]:  # Change character *MOVE TO A DIFFERENT FILE
             open_options()
 
         # Barrier

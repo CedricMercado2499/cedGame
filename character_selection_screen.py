@@ -3,6 +3,9 @@ import pygame
 from colors import *
 from start_screen import startMenu
 
+# IMPORTANT
+# **Going back to Character Selection from gameplay should hover the current character picked
+
 
 # To Do: Make the interface look better
 # Add more characters // make a separate file for characters
@@ -81,9 +84,9 @@ def characterSelection():
         display.blit(back_text, back_button)
 
     running = True
+
     # selected = (0, 0)
     # selection = characterList[0]
-
     selected = None
     selection = None
     back_selected = False
@@ -117,7 +120,7 @@ def characterSelection():
                         if confirm_selection:  # Handles confirm_selection
                             confirm_selection = False
 
-                        if not confirm_quit:
+                        elif not confirm_quit:
                             confirm_quit = True
                         else:
                             confirm_quit = False
@@ -138,8 +141,8 @@ def characterSelection():
                     selection = characterList[0]
 
             if back_selected:
-                selected = None
-                selection = None
+                selected = (0, 0)
+                selection = characterList[0]
                 if event.key == pygame.K_RETURN:
                     back_selected  = False
                     confirm_selection = False
