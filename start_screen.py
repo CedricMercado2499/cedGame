@@ -75,4 +75,3 @@ def startMenu():
         display.blit(quit_text, quit_button)
 
         pygame.display.update()
-
