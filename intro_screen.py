@@ -24,6 +24,9 @@ def introScreen():
     skip_text = "Press 'Esc' to skip"
     skip = skip_font.render(skip_text, True, (255, 255, 255))
 
+    test = pygame.image.load('images/testimage.png')
+    t_pos = (-test.get_width(), display.get_height() // 2 - test.get_height())
+
     # bool variables
     skip_intro = False
     running = True
@@ -39,9 +42,14 @@ def introScreen():
         if (pygame.time.get_ticks() - intro_timer) > intro_time or skip_intro:  # After 7 seconds or 'esc' key is pressed
             running = False
 
+        if t_pos[0] < display.get_width() // 2 - test.get_width() // 2:
+            t_pos = (t_pos[0] + 0.5, t_pos[1])
+
+
         # Displaying the screen and contents
         display.fill(BLACK)
         display.blit(intro, ((display.get_width() // 2) - (intro.get_width() // 2), (display.get_height() // 2) - (intro.get_height() // 2)))
         display.blit(skip, (0, 0))
+        display.blit(test, t_pos)
 
         pygame.display.update()
