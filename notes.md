@@ -64,3 +64,6 @@
 # Codes a bit cleaner, not sure what my next steps are
 # I can implement a map selection screen, add more configurable attributes for each character, make a health system, or create character abilities
 # Let me try making some special attacks
+
+# March 17, 2023
+# Map selection screen
