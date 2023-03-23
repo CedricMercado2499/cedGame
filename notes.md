@@ -71,3 +71,8 @@
 # March 20, 2023
 # Yeah, I haven't started on the map selection screen
 # Today's goal is for a better character model
+
+# March 23, 2023
+# Took a small break, I'm only back for a bit until my Co-op is done in 2 weeks
+# In my free time, I'll make a separate file and the goal is to make...
+# better character visuals
