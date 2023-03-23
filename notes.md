@@ -67,3 +67,7 @@
 
 # March 17, 2023
 # Map selection screen
+
+# March 20, 2023
+# Yeah, I haven't started on the map selection screen
+# Today's goal is for a better character model

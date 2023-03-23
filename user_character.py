@@ -26,6 +26,7 @@ class Player(Sprite):
         self.width = 30
         self.height = 30
 
+
         self.shirt_color = BLACK  # Don't need
 
         self.user_name = user_name
@@ -103,6 +104,18 @@ class Player(Sprite):
         self.right_arm_pos = (self.pos[0] + self.width, self.pos[1] + self.height / 2 - 5)
         self.right_arm = pygame.Surface((10, 30))
         self.right_arm.fill(BLACK)
+
+        self.left_leg_pos = 0
+        self.left_leg = pygame.Surface((10, 20))
+        self.left_leg.fill(BLACK)
+
+        self.right_leg_pos = 0
+        self.right_leg = pygame.Surface((10, 20))
+        self.right_leg.fill(BLACK)
+
+        self.head_pos = 0
+        self.head = pygame.Surface((30, 30))
+        self.head.fill(GRAY)
 
         # Keybind Movement
 
